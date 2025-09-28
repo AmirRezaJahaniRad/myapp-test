@@ -1,14 +1,15 @@
-import React from "react";
-import { Typography, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import {toast} from "react-toastify"
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from 'react-hook-form'
+
+import { Typography  } from "@mui/material";
+
 import { AuthButton , AuthInput } from "../../components/index"
 import AuthLayout from "../../layouts/AuthLayout";
-import { useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
-import { checkUser } from '../../services/axios.ts'
-import {toast} from "react-toastify"
-import {type loginFormProps } from "../../services/axios.ts"
-
+import { checkUser } from '../../lib/authAxios.ts'
+import {type loginFormProps } from "../../types/types.ts"
+import useAuthStore from "../../store/AuthStore.ts";
 
 const LoginPage: React.FC = () => {
   const form = useForm<loginFormProps>({
@@ -19,17 +20,17 @@ const LoginPage: React.FC = () => {
       mode: "onTouched",
      });
 
-  const { register , control , handleSubmit , formState ,reset} = form;
+  const { register , handleSubmit , formState , reset} = form;
   const {errors , isDirty} = formState; 
+  const {showToast , setToast , resetToast } = useAuthStore();
+  const navigate = useNavigate();
 
-  
   const CheckingID = async (data:loginFormProps) => {
     try {
       const res = await checkUser(data)
     if (res.status == 200) {
       toast.success("با موفقیت وارد شدید")
-      setTimeout(() => { console.log("ok")} ,3000)
-      reset()
+      setTimeout(() => { navigate("/selectCompany") } ,3000)
     }
     }
     catch {
@@ -46,15 +47,22 @@ const LoginPage: React.FC = () => {
       toast.error("لطفا تیک قوانین را بزنید")
     }}
 
+    useEffect( () => {
+      console.log("SHOW TOAST VALUE: ",showToast);
+      if (showToast) {
+        toast.success("با موفقیت ثبت نام شدید!")
+      }
+    } , [showToast , setToast , resetToast])
+
   return (
     <>
-    <AuthLayout>
+     <AuthLayout>
       <Typography variant="h5" className="mb-6 font-bold text-center">
             ورود
           </Typography>
 
-          <Box component="form" noValidate autoComplete="off" className="space-y-4 w-1/2" onSubmit={handleSubmit(onSubmit)}>
-            <AuthInput label="نام کاربری" id="usercode" type="text" register={register("usercode", {
+          <form noValidate autoComplete="off" className="space-y-4 w-1/2" onSubmit={handleSubmit(onSubmit)}>
+            <AuthInput label="نام کاربری" id="username" type="text" register={register("usercode", {
                           required: "نام کاربری خود را وارد کنید",
                           maxLength:100,
                           pattern:{
@@ -81,7 +89,7 @@ const LoginPage: React.FC = () => {
               <p className="authErrorMessage">{errors.password?.message}</p>
 
             <AuthButton>ورود</AuthButton>
-          </Box>
+          </form>
 
 
 
@@ -90,12 +98,11 @@ const LoginPage: React.FC = () => {
             <Link to="/register" className="authLink">
               ثبت نام
             </Link>
-            <Link to="/forgot-password" className="authLink">
+            <Link to="/forgotPassword" className="authLink">
               فراموشی رمز عبور
             </Link>
           </div>
     </AuthLayout>
-    <DevTool control={control}/>
     </>
   );
 };

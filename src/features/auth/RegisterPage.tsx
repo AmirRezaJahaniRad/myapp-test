@@ -1,13 +1,15 @@
 import React from "react";
-import { Typography, Box, FormControlLabel, Checkbox } from "@mui/material";
-import { AuthButton , AuthInput } from "../../components/index"
-import { useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
-import AuthLayout from "../../layouts/AuthLayout";
-import { createUser } from '../../services/axios.ts'
-import { type formInputProps } from "../../services/axios.ts";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useForm } from 'react-hook-form'
+
+import { Typography, FormControlLabel, Checkbox } from "@mui/material";
+
+import { AuthButton , AuthInput } from "../../components/index"
+import AuthLayout from "../../layouts/AuthLayout";
+import { createUser } from '../../lib/authAxios.ts'
+import { type formInputProps } from "../../types/types.ts";
+import useAuthStore from "../../store/AuthStore.ts";
 
 const RegisterPage: React.FC = () => {
 
@@ -21,32 +23,42 @@ const RegisterPage: React.FC = () => {
       repassword : "",
       rulesCheck : false
     }, 
-    mode: "onTouched",
+    mode: "all",
    });
-  const { register , control , handleSubmit , formState ,watch,reset} = form;
-  const {errors} = formState; 
+
+  const { register , handleSubmit , formState , watch} = form;
+  const { errors } = formState; 
+
+  const navigate = useNavigate();
   const password = watch("password");  
+  const setToast = useAuthStore((state) => state.setToast);
+  const {showToast} = useAuthStore();
 
   const CreatingUser = async (data:formInputProps) => {
     try {
-      const res = await createUser(data)
-      if (res.status == 201) {
-      toast.success("کاربر با موفقیت اضافه شد")
-      reset()
-      setTimeout(() => {<Navigate to="/login" replace />} ,3000)
+      console.log("Data before passing to creatUser:" , data);
+      const res = await createUser(data);  
+      console.log("Response of the server" , res.status);
+
+      if (res.status == 201 || res.status == 200) {
+      setToast();
+      navigate('/login');
       }
     }
    catch {
      toast.error("مجدد امتحان کنید");
-     reset();
-   }
+    }
   }
   const onSubmit = (data : formInputProps) => {
     if (data.rulesCheck == true) {
+      console.log("OK - ONSUBMIT")
+      console.log("Data Before Passing to Axios" , data)
       CreatingUser(data)
     }
     else {
       toast.error("لطفا تیک قوانین را بزنید")
+      setToast()
+      console.log(showToast)
     }
   }
 
@@ -57,7 +69,7 @@ const RegisterPage: React.FC = () => {
             ثبت نام
           </Typography>
 
-          <Box component="form" noValidate autoComplete="off" className="space-y-4 w-1/2 font-light" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-4 w-1/2 font-light" onSubmit={handleSubmit(onSubmit)}>
             <AuthInput label="نام کامل" id="username" inputMode="text" type="text" register={register("username",{
               required: "نام کامل خود را وارد کنید",
               minLength: {
@@ -132,10 +144,9 @@ const RegisterPage: React.FC = () => {
             />
             </div>
 
-            <AuthButton >ثبت</AuthButton>
-          </Box>
+            <AuthButton type="submit">ثبت</AuthButton>
+          </form>
     </AuthLayout>
-    <DevTool control={control}/>
     </>
   );
 };

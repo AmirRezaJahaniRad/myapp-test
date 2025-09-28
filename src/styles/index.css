@@ -1,20 +1,42 @@
 @import "tailwindcss";
 
+:root { 
+    --primary : #8B008B ;
+}
+.dark {
+    --primary : #888888;
+}
+
+@font-face {
+    font-family: 'Fanavari';
+    src: url('/fonts/Fanavari-Regular.eot');
+    src: url('/fonts/Fanavari-Regular.woff') format('woff'),
+    url('fonts/Fanavari-Regular.woff2') format('woff2'),
+    url('fonts/Fanavari-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @layer base {
     .container {
         margin-left: auto;
         margin-right: auto;
     }
+    .bg-primary {
+        background-color: var(--primary);
+    }
 }
 
 @layer components {
     .authLink {
-        @apply text-purple-700 hover:text-purple-500 hover:underline
+        @apply text-[var(--primary)] hover:opacity-65 hover:underline
     }
-    .main-div {
+
+    .main-auth-div {
         @apply overflow-hidden; 
         @apply bg-white;
     }   
+    
     .authErrorMessage {
         font-size: 0.75rem;
         @apply text-red-600 flex justify-end;

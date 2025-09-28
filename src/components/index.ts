@@ -1,2 +1,2 @@
-export { default as AuthButton } from './auth/AuthButton'
-export { default as AuthInput } from './auth/AuthInput'
+export { default as AuthButton } from './ui/auth/AuthButton'
+export { default as AuthInput } from './ui/auth/AuthInput'

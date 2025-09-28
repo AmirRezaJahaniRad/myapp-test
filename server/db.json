@@ -1,0 +1,84 @@
+{
+  "user": [
+    {
+      "id": "bebc",
+      "username": "123123",
+      "phonenumber": "092222",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "1010",
+      "username": "123123",
+      "phonenumber": "092222",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "95b7",
+      "username": "123123",
+      "phonenumber": "09999009",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "af5b",
+      "username": "123123",
+      "phonenumber": "09999009",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "e087",
+      "username": "123123",
+      "phonenumber": "09999009",
+      "email": "123asdasd@gmail.com",
+      "usercode": "asdsadasd",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "4edc",
+      "username": "123123",
+      "phonenumber": "09999009",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "6ecc",
+      "username": "asdsad",
+      "phonenumber": "09999009",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "affgjhkjl",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    },
+    {
+      "id": "b77d",
+      "username": "123123",
+      "phonenumber": "092222",
+      "email": "dfgghhg600@gmail.com",
+      "usercode": "asdasd",
+      "password": "12345678!A",
+      "repassword": "12345678!A",
+      "rulesCheck": true
+    }
+  ]
+}
