@@ -17,13 +17,14 @@ const LoginPage: React.FC = () => {
         usercode : "",
         password : "",
       }, 
-      mode: "onTouched",
+      mode: "all",
      });
 
   const { register , handleSubmit , formState , reset} = form;
   const {errors , isDirty} = formState; 
-  const {showToast , setToast , resetToast } = useAuthStore();
   const navigate = useNavigate();
+
+  const {showToast , setToast , resetToast } = useAuthStore();
 
   const CheckingID = async (data:loginFormProps) => {
     try {
@@ -61,7 +62,7 @@ const LoginPage: React.FC = () => {
             ورود
           </Typography>
 
-          <form noValidate autoComplete="off" className="space-y-4 w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form noValidate autoComplete="off" className="auth-form" onSubmit={handleSubmit(onSubmit)}>
             <AuthInput label="نام کاربری" id="username" type="text" register={register("usercode", {
                           required: "نام کاربری خود را وارد کنید",
                           maxLength:100,
@@ -88,13 +89,13 @@ const LoginPage: React.FC = () => {
                         })} />
               <p className="authErrorMessage">{errors.password?.message}</p>
 
-            <AuthButton>ورود</AuthButton>
+            <AuthButton type="submit">ورود</AuthButton>
           </form>
 
 
 
           {/* لینک‌ها */}
-          <div className="flex w-1/2 justify-between mt-4 text-sm">
+          <div className="flex w-full justify-between mt-4 px-5 text-sm">
             <Link to="/register" className="authLink">
               ثبت نام
             </Link>

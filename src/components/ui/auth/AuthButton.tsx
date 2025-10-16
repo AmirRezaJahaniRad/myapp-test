@@ -1,18 +1,27 @@
+import { Button , ButtonProps} from "@mui/material";
 import React from "react";
 
-interface MyComponentProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type AuthButtonProps = ButtonProps & {
   children : React.ReactNode;
+  className?: string;
 }
 
-const AuthButton : React.FC<MyComponentProps> = ({ children,  type="button" , ...props}) => {
+const AuthButton : React.FC<AuthButtonProps> = ({ children,  className , ...props}) => {
   return (
-        <button
-        type={type}
+        <Button
+        fullWidth
+        variant="contained"
+        color="primary"
         {...props}
-        className="bg-primary hover:opacity-80 text-white rounded-xl py-2 w-full duration-200 disabled:opacity-50"
+        className={className}
+        sx={{
+          "&:hover" : {
+            backgroundColor : "#671070"          
+          }
+        }}
         >
         {children}
-        </button>
+        </Button>
   );
 };
 
