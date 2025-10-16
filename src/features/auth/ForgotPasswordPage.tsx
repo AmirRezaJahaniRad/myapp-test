@@ -45,7 +45,7 @@ const ForgotPasswordPage: React.FC = () => {
             فراموشی رمز عبور
           </Typography>
 
-          <form noValidate autoComplete="off" className="space-y-4 w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form noValidate autoComplete="off" className="auth-form" onSubmit={handleSubmit(onSubmit)}>
               <AuthInput label="نام کاربری" id="usercode" type="text" register={register("usercode", {
               required: "نام کاربری خود را وارد کنید",
               maxLength:100,

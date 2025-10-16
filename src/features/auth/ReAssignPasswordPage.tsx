@@ -48,7 +48,7 @@ const ReAssignPasswordPage: React.FC = () => {
           تنظیم رمز عبور جدید
           </Typography>
 
-          <form noValidate autoComplete="off" className="space-y-4 w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form noValidate autoComplete="off" className="auth-form" onSubmit={handleSubmit(onSubmit)}>
               <AuthInput label=" رمز عبور جدید" type="password" id="newPassword"  register={register("newPassword", {
                             required: "رمز عبور خود را وارد کنید",
                             minLength:{

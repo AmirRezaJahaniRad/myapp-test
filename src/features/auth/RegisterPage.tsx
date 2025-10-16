@@ -69,7 +69,7 @@ const RegisterPage: React.FC = () => {
             ثبت نام
           </Typography>
 
-          <form className="space-y-4 w-1/2 font-light" onSubmit={handleSubmit(onSubmit)}>
+          <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
             <AuthInput label="نام کامل" id="username" inputMode="text" type="text" register={register("username",{
               required: "نام کامل خود را وارد کنید",
               minLength: {
